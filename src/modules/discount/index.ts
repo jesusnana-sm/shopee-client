@@ -123,7 +123,7 @@ export default class DiscountModule extends BaseModule {
    * @param request 
    */
   getDiscountList(request: GetDiscountListRequest): Promise<GetDiscountListResponse> {
-    let full_url = this.client.defaults.baseURL + 'discount/get';
+    let full_url = this.client.defaults.baseURL + 'discounts/get';
     let params: any = {
       ...request,
       partner_id: Number(this.config.partner_id),
@@ -131,7 +131,7 @@ export default class DiscountModule extends BaseModule {
       timestamp: Math.round(Date.now() / 1000),
     }
     let hmac = hmac256(this.config.partner_key || '', full_url + '|' + JSON.stringify(params))
-    return this.client.post('discount/get' ,params, {
+    return this.client.post('discounts/get' ,params, {
       headers: {
         Authorization: hmac
       }
